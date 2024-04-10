@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+.item {
+  border-top: 1px solid;
+  border-bottom: 1px solid;
+}
+.item.collapsed {
+  display: inline-block;
+  border: 0;
+}
+.item:not(.collapsed) {
+  padding-left: 50px;
+}
+
+.item > canvas {
+  margin: 5px;
+}
+.item.collapsed > canvas {
+  display: none;
+}
+.item.collapsed > canvas:first-child {
+  display: unset;
+}
+
+canvas:not(.loaded) {
+  background: black;
+}
+.bb canvas:not(.loaded) {
+  width: 78px;
+  height: 78px;
+}
+.cas canvas:not(.loaded) {
+  width: 104px;
+  height: 148px;
+}
+</style>
+<title>The Sims™ 4 Crystal Creations Stuff Pack</title></head>
+<body style="font-family: benton, sans-serif">
+<script type="text/javascript">
+const json_path = "sp49.json";
+</script>
+<script src="common.js"></script>
+</body>
+</html>
