@@ -22,7 +22,7 @@
 }
 
 canvas:not(.loaded) {
-  background: black;
+  background: grey;
 }
 .bb canvas:not(.loaded) {
   width: 78px;

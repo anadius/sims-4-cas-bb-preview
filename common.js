@@ -39,10 +39,10 @@ async function loadImage(canvas, loaded) {
   const response = await fetch(canvas.url);
   const blob = await response.blob();
 
+  const [colorImage, colorCtx] = await blobToCanvas(blob, canvas);
+
   // image loaded, you can start loading another one!
   loaded(canvas);
-
-  const [colorImage, colorCtx] = await blobToCanvas(blob, canvas);
 
   if(await blob.slice(24, 28).text() == "ALFA") {
     const length = (new DataView(await blob.slice(28, 32).arrayBuffer())).getUint32(0, false);
