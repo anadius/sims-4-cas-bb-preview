@@ -162,7 +162,12 @@ const name = document.createElement("h1")
 name.innerHTML = data.name;
 document.body.append(name);
 
-for(const [items_name, items_code] of [["Create a Sim", "cas"], ["Build Mode", "bb"]]) {
+const pairs = [["Create a Sim", "cas"], ["Build Mode", "bb"]];
+if(document.location.hostname === "localhost") {
+  pairs.push(["Hidden", "hidden"]);
+}
+
+for(const [items_name, items_code] of pairs) {
   if(typeof data[items_code] === "undefined") {
     continue;
   }
@@ -180,8 +185,12 @@ for(const [items_name, items_code] of [["Create a Sim", "cas"], ["Build Mode", "
     itemContainer.classList.add("item");
     itemContainer.classList.add("collapsed");
 
+    let useAsMain;
     if(document.location.hostname !== "localhost") {
-      ids.unshift(ids.splice(getRandomInt(0, ids.length), 1)[0]);
+      useAsMain = ids[getRandomInt(0, ids.length)];
+    }
+    else {
+      useAsMain = ids[0];
     }
     for(const id of ids) {
       const canvas = document.createElement("canvas");
@@ -189,6 +198,9 @@ for(const [items_name, items_code] of [["Create a Sim", "cas"], ["Build Mode", "
       canvas.setAttribute("data-id", id);
       canvas.width = 0;
       canvas.height = 0;
+      if(useAsMain === id) {
+        canvas.classList.add("main");
+      }
       itemContainer.append(canvas);
     }
 
@@ -202,7 +214,7 @@ for(const [items_name, items_code] of [["Create a Sim", "cas"], ["Build Mode", "
 
 {
   const release = await mutex.lock();
-  for(const canvas of document.querySelectorAll(".item > canvas:first-child")) {
+  for(const canvas of document.querySelectorAll(".item > canvas.main")) {
     loadQueue.push(canvas);
   }
   loaderRunning = true;
