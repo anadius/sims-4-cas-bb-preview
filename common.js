@@ -155,12 +155,25 @@ const toggleAll = e => {
   }
 };
 
+const colorChange = e => {
+  document.documentElement.style.setProperty("--bg-color", e.target.value);
+}
+
 const result = await fetch(json_path)
 const data = await result.json()
 
 const name = document.createElement("h1")
 name.innerHTML = data.name;
 document.body.append(name);
+
+const colorLabel = document.createElement("label");
+const colorPicker = document.createElement("input");
+colorPicker.type = "color";
+colorPicker.value = getComputedStyle(document.body).getPropertyValue("--bg-color");
+colorLabel.append("Image background color: ")
+colorLabel.append(colorPicker)
+document.body.append(colorLabel)
+colorPicker.addEventListener("change", colorChange);
 
 const pairs = [["Create a Sim", "cas"], ["Build Mode", "bb"]];
 if(document.location.hostname === "localhost") {

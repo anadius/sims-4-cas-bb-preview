@@ -1,3 +1,7 @@
+:root {
+  --bg-color: #d3d3d3;
+}
+
 .item {
   border-top: 1px solid;
   border-bottom: 1px solid;
@@ -12,7 +16,7 @@
 
 .item > canvas {
   margin: 5px;
-  background: lightgrey;
+  background: var(--bg-color);
 }
 .item.collapsed > canvas {
   display: none;
